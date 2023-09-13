@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#DCDCFF"
+    tools:context=".EditActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lobster_two"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:text="Edit Rules"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:padding="3dp">
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/poppins"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    android:layout_marginTop="25dp"
+    android:text="Maximum Limit"/>
+
+    <EditText
+        android:id="@+id/maxLimit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:background="@drawable/edittext_bg"
+        android:drawableLeft="@drawable/ic_maximum"
+        android:drawablePadding="8dp"
+        android:hint="Maximum Limit"
+        android:padding="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:text="Exchange Rate"/>
+
+    <EditText
+        android:id="@+id/exchangeRate"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/baseline_currency_exchange_24"
+        android:drawablePadding="8dp"
+        android:background="@drawable/edittext_bg"
+        android:hint="Exchange Rate"
+        android:padding="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:text="Withdraw Limit"/>
+
+    <EditText
+        android:id="@+id/withdrawLimit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:background="@drawable/edittext_bg"
+        android:drawableLeft="@drawable/baseline_monetization_on_24"
+        android:drawablePadding="8dp"
+        android:hint="Withdraw Limit"
+        android:padding="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:text="Merchant API Key"/>
+
+    <EditText
+        android:id="@+id/merchantAPI"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:background="@drawable/edittext_bg"
+        android:hint="Merchant API Key"
+        android:drawableLeft="@drawable/baseline_vpn_key_24"
+        android:drawablePadding="8dp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:text="Manual Payment"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioOption1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable"
+            android:layout_weight="1"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:id="@+id/radioOption2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disable"
+            android:layout_weight="1"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:onClick="submitBtnClick"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:text="Submit Changes"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"/>
+
+    </LinearLayout>
+</LinearLayout>
