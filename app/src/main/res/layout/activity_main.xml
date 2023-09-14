@@ -10,24 +10,25 @@
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:background="@color/primary">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Welcome Admin"
             android:fontFamily="@font/lobster_two"
-            android:textColor="@color/white"
-            android:textSize="28sp"
             android:textStyle="bold"
-            android:layout_gravity="center"
-            android:text="Welcome Admin"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:gravity="center"/>
+
     </androidx.appcompat.widget.Toolbar>
     
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:paddingTop="25dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="50dp"
         android:src="@drawable/mainimg"
         android:scaleType="centerCrop"/>
@@ -36,7 +37,7 @@
         android:id="@+id/viewReqBtn"
         android:onClick="onReqBtn"
         android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:drawableLeft="@drawable/view"
         android:background="@drawable/button_bg"
         android:drawableTint="@color/white"
@@ -44,7 +45,7 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:text="View Requests"
-        android:padding="15dp"
+        android:textColor="@color/white"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"/>
 
@@ -52,16 +53,18 @@
         android:id="@+id/editRulesBtn"
         android:onClick="onEditBtn"
         android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:background="@drawable/button_bg"
+        android:paddingEnd="30dp"
+        android:paddingStart="30dp"
         android:drawableLeft="@drawable/edit"
         android:drawableTint="@color/white"
         android:textStyle="bold"
         android:textSize="18sp"
         android:text="Edit Rules"
+        android:textColor="@color/white"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:padding="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"/>
 </LinearLayout>
