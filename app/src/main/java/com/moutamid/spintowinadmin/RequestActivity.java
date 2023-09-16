@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,10 +46,11 @@ public class RequestActivity extends AppCompatActivity {
                     // Retrieve "mobileNumber" and "withdrawalAmount" from the child node with the unique ID
                     String Number = idSnapshot.child("mobileNumber").getValue(String.class);
                     Integer Amount = idSnapshot.child("withdrawalAmount").getValue(Integer.class);
+                    String Name = idSnapshot.child("userName").getValue(String.class);
 
 
                     if (Number != null && Amount != null) {
-                        MyData item = new MyData(uniqueId, Number, Amount);
+                        MyData item = new MyData(uniqueId, Number, Amount, Name);
                         dataList.add(item);
                     }
                 }

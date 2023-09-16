@@ -3,6 +3,7 @@ package com.moutamid.spintowinadmin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,13 +23,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class EditActivity extends AppCompatActivity {
     DataModel dataModel;
-    private RadioGroup radioGroup;
     Integer max, exchange, withdrawlimit;
     String merchantapi;
     Boolean manualpay;
 
     EditText MaxLimit, ExchangeRate, WithdrawLimit, MerchantAPI;
-    RadioButton EnableBtn, DisableBtn;
+    Switch switchManual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +39,7 @@ public class EditActivity extends AppCompatActivity {
         ExchangeRate = findViewById(R.id.exchangeRate);
         WithdrawLimit = findViewById(R.id.withdrawLimit);
         MerchantAPI = findViewById(R.id.merchantAPI);
-        EnableBtn = findViewById(R.id.radioOption1);
-        DisableBtn = findViewById(R.id.radioOption2);
-        radioGroup = findViewById(R.id.radioGroup);
+        switchManual = findViewById(R.id.switchManual);
 
         fetchData();
     }
@@ -69,11 +68,9 @@ public class EditActivity extends AppCompatActivity {
                         MerchantAPI.setText(decodedAPI);
 
                         if (manualpay) {
-                            EnableBtn.setChecked(true);
-                            DisableBtn.setChecked(false);
+                            switchManual.setChecked(true);
                         } else {
-                            EnableBtn.setChecked(false);
-                            DisableBtn.setChecked(true);
+                            switchManual.setChecked(false);
                         }
                     }
                 }
@@ -95,31 +92,29 @@ public class EditActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(max) || TextUtils.isEmpty(exchange) || TextUtils.isEmpty(withdrawLimit) || TextUtils.isEmpty(merchantapi)) {
             Toast.makeText(EditActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         } else {
-            int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+            // Get a reference to the main node where you want to update the data
+            DatabaseReference reference = Constants.databaseReference();
 
-            if (selectedRadioButtonId == -1) {
-                Toast.makeText(EditActivity.this, "Please select an option for Manual Payment", Toast.LENGTH_SHORT).show();
-            } else {
-                // Get a reference to the main node where you want to update the data
-                DatabaseReference reference = Constants.databaseReference();
+            // Create a new child node called "configData"
+            DatabaseReference configDataRef = reference.child("configData");
 
-                // Create a new child node called "configData"
-                DatabaseReference configDataRef = reference.child("configData");
+            // Update the fields under "configData"
+            configDataRef.child("currentAvail").setValue(Integer.valueOf(max));
+            configDataRef.child("exchangeRate").setValue(Integer.valueOf(exchange));
+            configDataRef.child("withdrawLimit").setValue(Integer.valueOf(withdrawLimit));
 
-                // Update the fields under "configData"
-                configDataRef.child("currentAvail").setValue(Integer.valueOf(max));
-                configDataRef.child("exchangeRate").setValue(Integer.valueOf(exchange));
-                configDataRef.child("withdrawLimit").setValue(Integer.valueOf(withdrawLimit));
+            String data = merchantapi;
+            byte[] byteData = data.getBytes();
+            String base64EncodedData = Base64.encodeToString(byteData, Base64.DEFAULT);
+            configDataRef.child("merchantAPI").setValue(base64EncodedData);
 
-                String data = merchantapi;
-                byte[] byteData = data.getBytes();
-                String base64EncodedData = Base64.encodeToString(byteData, Base64.DEFAULT);
-                configDataRef.child("merchantAPI").setValue(base64EncodedData);
+            boolean isSwitchOn = switchManual.isChecked();
 
-                configDataRef.child("manualVisible").setValue(selectedRadioButtonId == R.id.radioOption1);
+            configDataRef.child("manualVisible").setValue(isSwitchOn);
 
-                Toast.makeText(EditActivity.this, "Changes have been made to the database", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(EditActivity.this, "Changes have been made to the database", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 }
